@@ -1,0 +1,33 @@
+sudo: required
+language: go
+go:
+ - 1.8.3
+services:
+ - docker
+ 
+install:
+  - cd $GOPATH/src/github.com/tjfoc/fabric-ca-gm
+  - chmod -R 777 *
+  #- make format
+  #- make imports
+  #- make rename
+  #- make docker
+  - go get github.com/tjfoc/gmsm/sm2
+  - go get github.com/tjfoc/gmsm/sm3
+  - go get github.com/tjfoc/gmsm/sm4
+  
+  - rm -rf bin
+  - mkdir bin
+  - make
+ 
+notifications:
+  email:
+    recipients:
+      - zhiqiang@tj-fintech.com
+      - yanwenze@tj-fintech.com
+      - maoxiuze@tj-fintech.com
+      - yewei@tj-fintech.com
+      
+    on_success: never # default: change
+    on_failure: always # default: always
+  
